@@ -1,0 +1,46 @@
+#ifndef HEADER_H
+#define HEADER_H
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+typedef struct x_red{
+
+	char		*file;
+	int			type;
+
+}			t_red;
+
+typedef struct x_env{
+
+	char 		*key;
+	char 		*value;
+
+}			t_env;
+
+typedef struct x_cmd{
+
+	char 		*command;
+	char 		**args;
+	int 		pipe;
+
+	t_red 		*red;
+
+}			t_cmd;
+
+typedef struct x_bash{
+
+	t_cmd 		*cmd;
+	t_env 		*env;
+	int 		num_cmd;
+
+}			t_bash;
+
+int count_pipes(char *line);
+int	ft_strlen(char *str);
+char	*ft_strdup(const char *s1);
+char **ft_split(char *str, char c);
+
+#endif
