@@ -23,8 +23,7 @@ typedef struct x_env{
 typedef struct x_cmd{
 
 	char 		*command;
-	char 		**args;
-	int 		pipe;
+	// int 		pipe;
 
 	t_red 		*red;
 
@@ -32,9 +31,12 @@ typedef struct x_cmd{
 
 typedef struct x_bash{
 
-	t_cmd 		*cmd;
-	t_env 		*env;
+	char		*commands;
+	char		**args;
 	int 		num_cmd;
+
+	t_cmd 		**cmd;
+	t_env 		*env;
 
 }			t_bash;
 
