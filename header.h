@@ -32,9 +32,12 @@ typedef struct x_env{
 typedef struct x_cmd{
 
 	char 		*command;
+	int			check_red;
+	int			check_env;
 	// int 		pipe;
 
-	t_red 		*red;
+	t_red 		*s_red;
+	t_env 		*s_env;
 
 }			t_cmd;
 
@@ -44,8 +47,7 @@ typedef struct x_bash{
 	char		**args;
 	int 		num_cmd;
 
-	t_cmd 		*cmd;
-	t_env 		*env;
+	t_cmd 		*s_cmd;
 
 }			t_bash;
 
@@ -53,5 +55,6 @@ int count_pipes(char *line);
 int	ft_strlen(char *str);
 char	*ft_strdup(char *s1);
 char **ft_split(char *str, char c);
+int	ft_strcmp(const char *s1,char *s2);
 
 #endif
