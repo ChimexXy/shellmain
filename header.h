@@ -6,6 +6,15 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+typedef enum x_type{
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+	INPUT,
+	OUTPUT,
+	HERE_DOC,
+	APPEND,
+}		t_type;
+
 typedef struct x_red{
 
 	char		*file;

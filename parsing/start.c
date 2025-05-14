@@ -23,7 +23,7 @@ void	allocate_line(t_bash *bash)
 
 	i = 0;
 	command = readline("minishell$ ");
-	bash = malloc(sizeof(t_bash) * count_pipes(command));
+	bash = malloc(sizeof(t_bash));
 	bash->cmd = malloc(sizeof(t_cmd) * count_pipes(command));
 	if(!bash->cmd || !bash)
 		return ;
