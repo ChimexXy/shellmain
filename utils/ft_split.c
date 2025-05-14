@@ -43,10 +43,10 @@ char **ft_split(char *str, char c)
 	char **tab = malloc((len + 1) * sizeof(char *));
 	while(cnt < len)
 	{
-		while(str[i] == c)
+		while(str[i] == c && str[i])
 			i++;
 		start = i;
-		while (str[i] != c)
+		while (str[i] != c && str[i])
 			i++;
 		tab[cnt] = ft_substr(str, start, i);
 		cnt++;

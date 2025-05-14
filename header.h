@@ -44,7 +44,7 @@ typedef struct x_bash{
 	char		**args;
 	int 		num_cmd;
 
-	t_cmd 		**cmd;
+	t_cmd 		*cmd;
 	t_env 		*env;
 
 }			t_bash;
