@@ -16,7 +16,7 @@ int check_redirection(char *str)
 	return (0);
 }
 
-int check_equal(char *str)
+int check_envirment(char *str)
 {
 	int	i;
 
@@ -30,38 +30,53 @@ int check_equal(char *str)
 	return (0);
 }
 
-int check_env(char *str)
+// int check_env(char *str)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while(str[i])
+// 	{
+// 		if()
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+int check_comand(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (str[i] == '|')
+		return (0);
 	while(str[i])
 	{
-		if((str[i] == '<') || (str[i] == '>') 
-			|| (str[i] == '<' && str[i + 1] == '<')
-				|| (str[i] == '>' && str[i + 1] == '>'))
-			return (1);
+		if(str[i] == '|' && str[i + 1] == '|')
+			return (i);
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
 void allocate_line(t_bash *bash)
 {
     char *command;
     int i;
+    int check;
 
     i = 0;
     command = readline("minishell$ ");
+	check = check_comand(command);
     bash->s_cmd = malloc(sizeof(t_cmd) * bash->num_cmd);
-    if (!command || !bash->s_cmd)
+    if (!command || !bash->s_cmd || check == 0)
         return;
-
-    bash->commands = ft_strdup(command);
+    bash->commands = ft_substr(command, 0, check);
     bash->args = ft_split(command, '|');
     bash->num_cmd = count_pipes(command);
-	bash->s_cmd->check_env = -1;
-	bash->s_cmd->check_red = -1;
+	bash->s_cmd->check_env = 0;
+	bash->s_cmd->check_red = 0;
 
     while (i < bash->num_cmd)
     {
