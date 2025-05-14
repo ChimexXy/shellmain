@@ -51,7 +51,7 @@ typedef struct x_bash{
 
 int count_pipes(char *line);
 int	ft_strlen(char *str);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(char *s1);
 char **ft_split(char *str, char c);
 
 #endif

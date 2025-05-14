@@ -35,9 +35,7 @@ void	allocate_line(t_bash *bash)
 		bash->cmd[i]->command = bash->args[i];
 		i++;
 	}
-	// bash->cmd->command = ft_strdup(command);
-	// bash->cmd->args = ft_split(command, '|');
-	// bash->cmd->pipe = 
+
 }
 
 int main()
