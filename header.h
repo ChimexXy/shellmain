@@ -13,7 +13,7 @@ typedef enum x_type{
 	OUTPUT, // >
 	HERE_DOC, // <<
 	APPEND, // >>
-	DOLLAR_
+	DOLLAR_SIGN, // $
 }		t_type;
 
 typedef struct x_red{
@@ -33,9 +33,9 @@ typedef struct x_env{
 typedef struct x_cmd{
 
 	char 		*command;
+	char		**split_com;
 	int			check_red;
 	int			check_env;
-	// int 		pipe;
 
 	t_red 		*s_red;
 	t_env 		*s_env;

@@ -30,20 +30,6 @@ int check_envirment(char *str)
 	return (0);
 }
 
-// int check_env(char *str)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while(str[i])
-// 	{
-// 		if()
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 int check_comand(char *str)
 {
 	int	i;
@@ -58,6 +44,21 @@ int check_comand(char *str)
 		i++;
 	}
 	return (i);
+}
+
+int check_red_env(t_bash *bash)
+{
+	int	i;
+
+	i = 0;
+	while(i < bash->num_cmd)
+	{
+		if(check_envirment(bash->s_cmd[i].command) == 1)
+			bash->s_cmd[i].check_env = 1;
+		if(check_redirection(bash->s_cmd[i].command) == 1)
+			bash->s_cmd[i].check_red = 1;
+		i++;
+	}
 }
 
 void allocate_line(t_bash *bash)
@@ -93,6 +94,6 @@ int main()
 
 	bash = malloc(sizeof(t_bash));
 	allocate_line(bash);
-	check_red_env();
+	check_red_env(bash);
 
 }
