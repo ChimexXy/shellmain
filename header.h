@@ -59,4 +59,8 @@ char **ft_split(char *str, char c);
 int	ft_strcmp(const char *s1,char *s2);
 char *ft_substr(char *str, int start, int end);
 
+char **ft_split_cmd(char *str, char c);
+int	check_sin_dou(char *str);
+int count_word_cmd(char *str, char c);
+
 #endif

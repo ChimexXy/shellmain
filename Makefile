@@ -2,8 +2,8 @@ NAME = minishell
 
 CFLAGS = -Wextra -Wall -Werror
 
-SRC = utils/count_pipe.c utils/ft_split.c utils/ft_strdup.c utils/ft_strlen.c \
-	  parsing/start.c \
+SRC = utils/count_pipe.c utils/ft_split.c utils/ft_strdup.c utils/ft_strlen.c  utils/ft_substr.c\
+	  parsing/start.c utils/ft_split_cmd.c \
 
 OBJ = $(SRC:.c=.o)
 

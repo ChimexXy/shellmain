@@ -46,7 +46,7 @@ int check_comand(char *str)
 	return (i);
 }
 
-int check_red_env(t_bash *bash)
+void check_red_env(t_bash *bash)
 {
 	int	i;
 
@@ -88,6 +88,7 @@ void allocate_line(t_bash *bash)
 }
 
 
+
 int main()
 {
 	t_bash *bash;
@@ -95,5 +96,5 @@ int main()
 	bash = malloc(sizeof(t_bash));
 	allocate_line(bash);
 	check_red_env(bash);
-
+	// printf("%d\n", bash->s_cmd[1].check_red);
 }
