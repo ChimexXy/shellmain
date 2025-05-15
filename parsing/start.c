@@ -87,7 +87,17 @@ void allocate_line(t_bash *bash)
     free(command);
 }
 
+void	command_splited(t_bash *bash)
+{
+	int	i;
 
+	i = 0;
+	while(i < bash->num_cmd)
+	{
+		bash->s_cmd[i].split_com = ft_split_cmd(bash->s_cmd->command, ' ');
+		i++;
+	}
+}
 
 int main()
 {
@@ -96,5 +106,6 @@ int main()
 	bash = malloc(sizeof(t_bash));
 	allocate_line(bash);
 	check_red_env(bash);
+	command_splited(bash);
 	// printf("%d\n", bash->s_cmd[1].check_red);
 }
