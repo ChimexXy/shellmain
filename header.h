@@ -7,6 +7,8 @@
 #include <readline/history.h>
 
 typedef enum x_type{
+	REDIRECTION,
+	ENVIROMENT,	
 	SINGLE_QUOTE, // '
 	DOUBLE_QUOTE, // "
 	INPUT, // <
