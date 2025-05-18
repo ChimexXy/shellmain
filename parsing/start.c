@@ -36,14 +36,23 @@ int check_comand(char *str)
 
 	i = 0;
 	if (str[i] == '|')
+	{
+		if(str[i] == '|' && str[i + 1] == '|')
+			printf("bash: syntax error near unexpected token `||'\n");
+		else
+			printf("bash: syntax error near unexpected token `|'\n");
 		return (0);
+	}
 	while(str[i])
 	{
 		if(str[i] == '|' && str[i + 1] == '|')
-			return (i);
+		{
+			printf("invalid token :( \n");
+			return (0);
+		}	
 		i++;
 	}
-	return (i);
+	return (1);
 }
 
 void check_red_env(t_bash *bash)
@@ -70,18 +79,22 @@ void allocate_line(t_bash *bash)
     i = 0;
     command = readline("minishell$ ");
 	check = check_comand(command);
-    bash->s_cmd = malloc(sizeof(t_cmd) * bash->num_cmd);
-    if (!command || !bash->s_cmd || check == 0)
+    if (!command || check == 0)
+	{
+		free(command);
         return;
-    bash->commands = ft_substr(command, 0, check);
-    bash->args = ft_split(command, '|');
+	}
     bash->num_cmd = count_pipes(command);
-	bash->s_cmd->check_env = 0;
-	bash->s_cmd->check_red = 0;
-
+    bash->s_cmd = malloc(sizeof(t_cmd) * bash->num_cmd);
+	if (!bash->s_cmd )
+		return;
+    bash->commands = ft_strdup(command);
+    bash->args = ft_split(command, '|');
     while (i < bash->num_cmd)
     {
         bash->s_cmd[i].command = ft_strdup(bash->args[i]);
+		bash->s_cmd[i].check_env = 0;
+		bash->s_cmd[i].check_red = 0;
         i++;
     }
     free(command);
@@ -94,7 +107,7 @@ void	command_splited(t_bash *bash)
 	i = 0;
 	while(i < bash->num_cmd)
 	{
-		bash->s_cmd[i].split_com = ft_split_cmd(bash->s_cmd->command, ' ');
+		bash->s_cmd[i].argument = ft_split_cmd(bash->s_cmd[i].command, ' ');
 		i++;
 	}
 }
@@ -104,8 +117,11 @@ int main()
 	t_bash *bash;
 
 	bash = malloc(sizeof(t_bash));
-	allocate_line(bash);
-	check_red_env(bash);
-	command_splited(bash);
-	// printf("%d\n", bash->s_cmd[1].check_red);
+	while(1)
+	{	
+		allocate_line(bash);
+		check_red_env(bash);
+		command_splited(bash);
+	}
+	// printf("%d\n", bash->s_cmd[0].check_env);
 }

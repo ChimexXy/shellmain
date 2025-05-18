@@ -33,7 +33,7 @@ typedef struct x_env{
 typedef struct x_cmd{
 
 	char 		*command;
-	char		**split_com;
+	char		**argument;
 	int			check_red;
 	int			check_env;
 
