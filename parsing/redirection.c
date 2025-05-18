@@ -44,6 +44,11 @@ int	check_out_in(t_bash *bash)
 				bash->s_cmd[i].s_red[x].type = OUTPUT;
 				x++;
 			}
+			else if(bash->s_cmd[i].command[j] == '<')
+			{
+				bash->s_cmd[i].s_red[x].type = INPUT;
+				x++;
+			}
 			j++;
 		}
 		i++;
