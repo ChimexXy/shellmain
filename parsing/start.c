@@ -122,6 +122,6 @@ int main()
 		allocate_line(bash);
 		check_red_env(bash);
 		command_splited(bash);
-	printf("%s\n", bash->s_cmd[0].argument[0]);
+	// printf("%s\n", bash->s_cmd[0].argument[0]);
 	}
 }

@@ -21,7 +21,7 @@ typedef enum x_type{
 typedef struct x_red{
 
 	char		*file;
-	int			type;
+	t_type		type;
 
 }			t_red;
 
