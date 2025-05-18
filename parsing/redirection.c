@@ -26,18 +26,32 @@ int	count_red(char *str)
 	return (red);
 }
 
-int	check_out_in(char *str)
+int	check_out_in(t_bash *bash)
 {
 	int	i;
+	int	j;
+	int	x;
 
 	i = 0;
-	while(str[i])
+	j = 0;
+	x = 0;
+	while(i < bash->num_cmd)
 	{
-
+		while (bash->s_cmd[i].command[j])
+		{
+			if(bash->s_cmd[i].command[j] == '>')
+			{
+				bash->s_cmd[i].s_red[x].type = OUTPUT;
+				x++;
+			}
+			j++;
+		}
+		i++;
 	}
+	return (0);
 }
 
-int	check_hedo_app(char *str)
+int	check_hedo_app(t_bash *bash)
 {
 
 }
