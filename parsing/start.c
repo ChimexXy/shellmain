@@ -97,6 +97,7 @@ void allocate_line(t_bash *bash)
 			return ;
         bash->s_cmd[i]->command = ft_strdup(bash->args[i]);
 		bash->s_cmd[i]->s_red = NULL;
+		bash->s_cmd[i]->s_env = NULL;
 		bash->s_cmd[i]->check_env = 0;
 		bash->s_cmd[i]->check_red = 0;
         i++;
@@ -119,6 +120,7 @@ void	command_splited(t_bash *bash)
 
 int main(int ac , char **av, char **env)
 {
+	int i = 0;
 	t_bash *bash;
 
 	bash = malloc(sizeof(t_bash));
@@ -127,9 +129,19 @@ int main(int ac , char **av, char **env)
 		allocate_line(bash);
 		check_red_env(bash);
 		command_splited(bash);
-		parse_redirection(bash);
-		printf("-->>%s\n",bash->s_cmd[0]->argument[1]);
-		parse_env(bash);
-		
+		if(bash->s_cmd[i]->check_red == 1)
+			parse_redirection(bash);
+		if(bash->s_cmd[i]->check_env == 1)
+			parse_env(bash);
+	if (bash->s_cmd[0]->s_env)
+    {
+        int j = 0;
+        while (bash->s_cmd[0]->s_env[j])
+        {
+            printf("Key: %s\n", bash->s_cmd[0]->s_env[j]->key);
+            printf("Value: %s\n", bash->s_cmd[0]->s_env[j]->value);
+            j++;
+        }
+    }
 	}
 }
