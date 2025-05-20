@@ -1,17 +1,18 @@
 #include "../header.h"
 
-char *ft_substr(char *str, int start, int end)
+char *ft_substr(char *s, int start, int len)
 {
-	int i = start;
-	int ind = 0;
-	int j = end - start;
-	char *ptr = malloc(j + 1);
-	while(i < end)
+
+	int i = 0;
+	char *sub = malloc(len + 1);
+	if (!s || start < 0 || len < 0 || !sub)
+		return (NULL);
+	while (i < len && s[start + i])
 	{
-		ptr[ind] = str[i];
-		ind++;
+		sub[i] = s[start + i];
 		i++;
 	}
-	ptr[ind] = '\0';
-	return ptr;
+	sub[i] = '\0';
+
+	return sub;
 }
