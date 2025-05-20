@@ -117,7 +117,7 @@ void	command_splited(t_bash *bash)
 	}
 }
 
-int main()
+int main(int ac , char **av, char **env)
 {
 	t_bash *bash;
 
@@ -128,16 +128,8 @@ int main()
 		check_red_env(bash);
 		command_splited(bash);
 		parse_redirection(bash);
+		printf("-->>%s\n",bash->s_cmd[0]->argument[1]);
+		parse_env(bash);
 		
-		if (bash->s_cmd[0]->s_red)
-		{
-			int j = 0;
-			while (bash->s_cmd[0]->s_red[j])
-			{
-				printf("type: %d, file: %s\n", bash->s_cmd[0]->s_red[j]->type, bash->s_cmd[0]->s_red[j]->file);
-				j++;
-			}
-		}
-
 	}
 }

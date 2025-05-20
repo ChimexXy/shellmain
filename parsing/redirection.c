@@ -109,8 +109,6 @@ void	parse_red_files(t_bash *bash, int ind)
 	}
 }
 
-
-
 int	parse_redirection(t_bash *bash)
 {
 	int i;

@@ -40,7 +40,7 @@ typedef struct x_cmd{
 	int			check_env;
 
 	t_red 		**s_red;
-	t_env 		*s_env;
+	t_env 		**s_env;
 
 }			t_cmd;
 
@@ -60,10 +60,13 @@ char	*ft_strdup(char *s1);
 char **ft_split(char *str, char c);
 int	ft_strcmp(const char *s1,char *s2);
 char *ft_substr(char *str, int start, int end);
+// int	ft_strchr(char *str, char c);
+char	*ft_strchr(char *s, int c);
 
 char **ft_split_cmd(char *str, char c);
 int	check_sin_dou(char *str);
 int count_word_cmd(char *str, char c);
 int	parse_redirection(t_bash *bash);
+int	parse_env(t_bash *bash);
 
 #endif
