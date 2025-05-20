@@ -62,10 +62,10 @@ void check_red_env(t_bash *bash)
 	i = 0;
 	while(i < bash->num_cmd)
 	{
-		if(check_envirment(bash->s_cmd[i].command) == 1)
-			bash->s_cmd[i].check_env = 1;
-		if(check_redirection(bash->s_cmd[i].command) == 1)
-			bash->s_cmd[i].check_red = 1;
+		if(check_envirment(bash->s_cmd[i]->command) == 1)
+			bash->s_cmd[i]->check_env = 1;
+		if(check_redirection(bash->s_cmd[i]->command) == 1)
+			bash->s_cmd[i]->check_red = 1;
 		i++;
 	}
 }
@@ -82,21 +82,26 @@ void allocate_line(t_bash *bash)
     if (!command || check == 0)
 	{
 		free(command);
-        return;
+        return ;
 	}
     bash->num_cmd = count_pipes(command);
-    bash->s_cmd = malloc(sizeof(t_cmd) * bash->num_cmd);
+    bash->s_cmd = malloc(sizeof(t_cmd *) * bash->num_cmd);
 	if (!bash->s_cmd )
 		return;
     bash->commands = ft_strdup(command);
     bash->args = ft_split(command, '|');
     while (i < bash->num_cmd)
     {
-        bash->s_cmd[i].command = ft_strdup(bash->args[i]);
-		bash->s_cmd[i].check_env = 0;
-		bash->s_cmd[i].check_red = 0;
+        bash->s_cmd[i] = malloc(sizeof(t_cmd));
+		if(!bash->s_cmd[i])
+			return ;
+        bash->s_cmd[i]->command = ft_strdup(bash->args[i]);
+		bash->s_cmd[i]->s_red = NULL;
+		bash->s_cmd[i]->check_env = 0;
+		bash->s_cmd[i]->check_red = 0;
         i++;
     }
+	bash->s_cmd[i] = NULL;
     free(command);
 }
 
@@ -107,7 +112,7 @@ void	command_splited(t_bash *bash)
 	i = 0;
 	while(i < bash->num_cmd)
 	{
-		bash->s_cmd[i].argument = ft_split_cmd(bash->s_cmd[i].command, ' ');
+		bash->s_cmd[i]->argument = ft_split_cmd(bash->s_cmd[i]->command, ' ');
 		i++;
 	}
 }
@@ -122,6 +127,17 @@ int main()
 		allocate_line(bash);
 		check_red_env(bash);
 		command_splited(bash);
-	// printf("%s\n", bash->s_cmd[0].argument[0]);
+		parse_redirection(bash);
+		
+		if (bash->s_cmd[0]->s_red)
+		{
+			int j = 0;
+			while (bash->s_cmd[0]->s_red[j])
+			{
+				printf("type: %d, file: %s\n", bash->s_cmd[0]->s_red[j]->type, bash->s_cmd[0]->s_red[j]->file);
+				j++;
+			}
+		}
+
 	}
 }

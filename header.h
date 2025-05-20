@@ -39,7 +39,7 @@ typedef struct x_cmd{
 	int			check_red;
 	int			check_env;
 
-	t_red 		*s_red;
+	t_red 		**s_red;
 	t_env 		*s_env;
 
 }			t_cmd;
@@ -50,7 +50,7 @@ typedef struct x_bash{
 	char		**args;
 	int 		num_cmd;
 
-	t_cmd 		*s_cmd;
+	t_cmd 		**s_cmd;
 
 }			t_bash;
 
@@ -64,5 +64,6 @@ char *ft_substr(char *str, int start, int end);
 char **ft_split_cmd(char *str, char c);
 int	check_sin_dou(char *str);
 int count_word_cmd(char *str, char c);
+int	parse_redirection(t_bash *bash);
 
 #endif
