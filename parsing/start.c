@@ -120,7 +120,6 @@ void	command_splited(t_bash *bash)
 
 int main(int ac , char **av, char **env)
 {
-	int i = 0;
 	t_bash *bash;
 
 	bash = malloc(sizeof(t_bash));
@@ -129,19 +128,25 @@ int main(int ac , char **av, char **env)
 		allocate_line(bash);
 		check_red_env(bash);
 		command_splited(bash);
-		if(bash->s_cmd[i]->check_red == 1)
-			parse_redirection(bash);
-		if(bash->s_cmd[i]->check_env == 1)
-			parse_env(bash);
-	if (bash->s_cmd[0]->s_env)
+		parse_redirection(bash);
+		parse_env(bash);
+	
+	int i = 0;
+	if (bash->s_cmd[i]->s_env)
     {
+		while(bash->s_cmd[i])
+		{
+
         int j = 0;
-        while (bash->s_cmd[0]->s_env[j])
+        while (bash->s_cmd[i]->s_env[j])
         {
-            printf("Key: %s\n", bash->s_cmd[0]->s_env[j]->key);
-            printf("Value: %s\n", bash->s_cmd[0]->s_env[j]->value);
+            printf("Key: %s\n", bash->s_cmd[i]->s_env[j]->key);
+            printf("Value: %s\n", bash->s_cmd[i]->s_env[j]->value);
             j++;
         }
+		i++;
+
+		}
     }
 	}
 }
