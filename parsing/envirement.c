@@ -31,8 +31,6 @@ void parse_env_entries(t_bash *bash, int ind, int num_env)
             i++;
             continue;
         }
-
-        // else, parse normally
         bash->s_cmd[ind]->s_env[x]->key = ft_substr(
             bash->s_cmd[ind]->argument[i], 0, eq_pos - bash->s_cmd[ind]->argument[i]);
         bash->s_cmd[ind]->s_env[x]->value = ft_strdup(eq_pos + 1);

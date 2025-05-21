@@ -70,6 +70,8 @@ void check_red_env(t_bash *bash)
 	}
 }
 
+
+
 void allocate_line(t_bash *bash)
 {
     char *command;
@@ -103,19 +105,40 @@ void allocate_line(t_bash *bash)
         i++;
     }
 	bash->s_cmd[i] = NULL;
+	if (red_parse(bash) == 0)
+	{
+		printf("bash: syntax error near unexpected token `newline'\n");
+		return ;
+	}
     free(command);
 }
 
-void	command_splited(t_bash *bash)
+void command_splited(t_bash *bash)
 {
-	int	i;
+    int i;
+    int j;
+	char *temp;
 
 	i = 0;
-	while(i < bash->num_cmd)
-	{
-		bash->s_cmd[i]->argument = ft_split_cmd(bash->s_cmd[i]->command, ' ');
-		i++;
-	}
+    while (i < bash->num_cmd)
+    {
+        bash->s_cmd[i]->argument = ft_split(bash->s_cmd[i]->command, ' ');
+        j = 0;
+        while (bash->s_cmd[i]->argument[j])
+        {
+            if (bash->s_cmd[i]->argument[j])
+            {
+                temp = remove_quotes(bash->s_cmd[i]->argument[j]);
+                if (temp)
+                {
+                    free(bash->s_cmd[i]->argument[j]);
+                    bash->s_cmd[i]->argument[j] = temp;
+                }
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 int main(int ac , char **av, char **env)
@@ -131,22 +154,16 @@ int main(int ac , char **av, char **env)
 		parse_redirection(bash);
 		parse_env(bash);
 	
-	int i = 0;
-	if (bash->s_cmd[i]->s_env)
-    {
-		while(bash->s_cmd[i])
+		int i = 0;
+		while(i < bash->num_cmd)
 		{
-
-        int j = 0;
-        while (bash->s_cmd[i]->s_env[j])
-        {
-            printf("Key: %s\n", bash->s_cmd[i]->s_env[j]->key);
-            printf("Value: %s\n", bash->s_cmd[i]->s_env[j]->value);
-            j++;
-        }
-		i++;
-
+       		int j = 0;
+        	while (bash->s_cmd[i]->argument[j])
+        	{
+           		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
+            	j++;
+    		}
+			i++;
 		}
-    }
 	}
 }

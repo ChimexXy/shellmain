@@ -7,10 +7,10 @@
 #include <readline/history.h>
 
 typedef enum x_type{
-	REDIRECTION,
-	ENVIROMENT,	
-	SINGLE_QUOTE, // '
-	DOUBLE_QUOTE, // "
+	// REDIRECTION,
+	// ENVIROMENT,	
+	// SINGLE_QUOTE, // '
+	// DOUBLE_QUOTE, // "
 	INPUT, // <
 	OUTPUT, // >
 	HERE_DOC, // <<
@@ -63,10 +63,9 @@ char *ft_substr(char *str, int start, int end);
 // int	ft_strchr(char *str, char c);
 char	*ft_strchr(char *s, int c);
 
-char **ft_split_cmd(char *str, char c);
-int	check_sin_dou(char *str);
-int count_word_cmd(char *str, char c);
+int	red_parse(t_bash *bash);
 int	parse_redirection(t_bash *bash);
 int	parse_env(t_bash *bash);
+char *remove_quotes(char *str);
 
 #endif
