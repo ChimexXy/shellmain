@@ -69,7 +69,7 @@ int parse_env(t_bash *bash) {
                 return 0;
             parse_env_entries(bash, i, num_env);
         }
-        i++;
+        i++; 
     }
     return 1;
 }
