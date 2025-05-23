@@ -67,5 +67,6 @@ int	red_parse(t_bash *bash);
 int	parse_redirection(t_bash *bash);
 int	parse_env(t_bash *bash);
 char *remove_quotes(char *str);
+char	**tokenizer(char *str);
 
 #endif

@@ -126,7 +126,9 @@ void command_splited(t_bash *bash)
 	i = 0;
     while (i < bash->num_cmd)
     {
-        bash->s_cmd[i]->argument = ft_split(bash->s_cmd[i]->command, ' ');
+		if (!bash->s_cmd[i]->command)
+			return;
+        bash->s_cmd[i]->argument = tokenizer(bash->s_cmd[i]->command);
         j = 0;
         while (bash->s_cmd[i]->argument[j])
         {
@@ -158,16 +160,18 @@ int main(int ac , char **av, char **env)
 		parse_redirection(bash);
 		parse_env(bash);
 	
-		// int i = 0;
-		// while(i < bash->num_cmd)
-		// {
-       	// 	int j = 0;
-        // 	while (bash->s_cmd[i]->argument[j])
-        // 	{
-        //    		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
-        //     	j++;
-    	// 	}
-		// 	i++;
-		// }
+		int i = 0;
+		while(i < bash->num_cmd)
+		{
+       		int j = 0;
+        	while (bash->s_cmd[i]->argument[j])
+        	{
+				if (!bash->s_cmd[i]->argument[j])
+					return 0;
+           		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
+            	j++;
+    		}
+			i++;
+		}
 	}
 }
