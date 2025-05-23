@@ -5,6 +5,8 @@ int check_redirection(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while(str[i])
 	{
 		if((str[i] == '<') || (str[i] == '>') 
@@ -21,6 +23,8 @@ int check_envirment(char *str)
 	int	i;
 
 	i = 0;
+	if(!str)
+		return 0;
 	while(str[i])
 	{
 		if (str[i] == '=')
@@ -154,16 +158,16 @@ int main(int ac , char **av, char **env)
 		parse_redirection(bash);
 		parse_env(bash);
 	
-		int i = 0;
-		while(i < bash->num_cmd)
-		{
-       		int j = 0;
-        	while (bash->s_cmd[i]->argument[j])
-        	{
-           		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
-            	j++;
-    		}
-			i++;
-		}
+		// int i = 0;
+		// while(i < bash->num_cmd)
+		// {
+       	// 	int j = 0;
+        // 	while (bash->s_cmd[i]->argument[j])
+        // 	{
+        //    		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
+        //     	j++;
+    	// 	}
+		// 	i++;
+		// }
 	}
 }
