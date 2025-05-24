@@ -67,7 +67,10 @@ int	check_command1(char *str)
 	while(str[i] == ' ' && i >= 0)
 		i++;
 	if(str[i] == '|')
+	{
+		printf("invalid token :( \n");
 		return (0);
+	}
 	return (1);	
 }
 
@@ -101,6 +104,8 @@ void allocate_line(t_bash *bash)
 	check1 = check_command1(command);
     if (!command || check == 0 || check1 == 0)
 	{
+		bash->num_cmd = 0;
+		bash->s_cmd = NULL;
 		free(command);
         return ;
 	}
