@@ -34,7 +34,7 @@ int check_envirment(char *str)
 	return (0);
 }
 
-int check_comand(char *str)
+int check_command(char *str)
 {
 	int	i;
 
@@ -59,6 +59,18 @@ int check_comand(char *str)
 	return (1);
 }
 
+int	check_command1(char *str)
+{
+	int i;
+
+	i = ft_strlen(str) - 1;
+	while(str[i] == ' ' && i >= 0)
+		i++;
+	if(str[i] == '|')
+		return (0);
+	return (1);	
+}
+
 void check_red_env(t_bash *bash)
 {
 	int	i;
@@ -81,11 +93,13 @@ void allocate_line(t_bash *bash)
     char *command;
     int i;
     int check;
+	int check1;
 
     i = 0;
     command = readline("minishell$ ");
-	check = check_comand(command);
-    if (!command || check == 0)
+	check = check_command(command);
+	check1 = check_command1(command);
+    if (!command || check == 0 || check1 == 0)
 	{
 		free(command);
         return ;
@@ -173,5 +187,6 @@ int main(int ac , char **av, char **env)
     		}
 			i++;
 		}
+		ft_free(bash);
 	}
 }

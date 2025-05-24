@@ -22,6 +22,7 @@ typedef struct x_red{
 
 	char		*file;
 	t_type		type;
+	// int			check_flag;
 
 }			t_red;
 
@@ -68,5 +69,7 @@ int	parse_redirection(t_bash *bash);
 int	parse_env(t_bash *bash);
 char *remove_quotes(char *str);
 char	**tokenizer(char *str);
+
+void    ft_free(t_bash *bash);
 
 #endif
