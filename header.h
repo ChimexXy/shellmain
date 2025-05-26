@@ -22,7 +22,7 @@ typedef struct x_red{
 
 	char		*file;
 	t_type		type;
-	// int			check_flag;
+	int			check_flag;
 
 }			t_red;
 

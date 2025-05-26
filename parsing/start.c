@@ -183,13 +183,17 @@ int main(int ac , char **av, char **env)
 		while(i < bash->num_cmd)
 		{
        		int j = 0;
-        	while (bash->s_cmd[i]->argument[j])
-        	{
-				if (!bash->s_cmd[i]->argument[j])
-					return 0;
-           		printf("command: %s\n", bash->s_cmd[i]->argument[j]);
-            	j++;
-    		}
+			if(bash->s_cmd[i]->check_red == 1)
+			{
+				// printf("--->>>test\n");
+				while (bash->s_cmd[i]->s_red[j])
+				{
+					printf("file: %s\n", bash->s_cmd[i]->s_red[j]->file);
+					printf("file: %d\n", bash->s_cmd[i]->s_red[j]->type);
+				    // printf("value: %s\n", bash->s_cmd[i]->s_env[j]->value);
+					j++;
+				}
+			}
 			i++;
 		}
 		ft_free(bash);
