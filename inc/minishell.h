@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
+#include <stdlib.h>
+
 typedef struct s_cmd
 {
     char **args;
